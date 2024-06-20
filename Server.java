@@ -3,11 +3,16 @@ import java.rmi.RemoteException;
 
 public class Server {
     public static void main(String[] args) {
-
         try {
             // Create instances of CityImpl
             CityRemote frankfurtServer = new CityImpl("Frankfurt");
             CityRemote berlinServer = new CityImpl("Berlin");
+
+            // Add inhabitants to the city instances
+            frankfurtServer.addInhabitant("Alice", "01/01/1990", "Single");
+            frankfurtServer.addInhabitant("Bob", "02/02/1990", "Married");
+            berlinServer.addInhabitant("Charlie", "03/03/1990", "Single");
+            berlinServer.addInhabitant("David", "04/04/1990", "Married");
 
             // Bind the city instances to the RMI registry
             Naming.rebind("rmi://localhost/FrankfurtServer", frankfurtServer);
